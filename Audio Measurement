@@ -1,0 +1,131 @@
+const int Mic = A0;
+const int LED1 = 22;
+const int LED2 = 26;
+const int LED3 = 30;
+const int LED4 = 34;
+const int LED5 = 38;
+const int LED6 = 42;
+const int LED7 = 46;
+const int LED8 = 50;
+int v = 0;
+
+// Setting up low volume
+  const int Low = 250;
+
+// Setting up high volume
+  const int High = 320;
+
+// Getting Range & Delta
+  int Range = 320 - 250;
+
+  int Delta = Range/7;
+
+void setup() 
+
+{
+
+  // starting serial plotter
+  Serial.begin(9600);
+  
+  //here we are setting up all pins as an outputs for LEDs
+  
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
+  pinMode(LED3, OUTPUT);
+  pinMode(LED4, OUTPUT);
+  pinMode(LED5, OUTPUT);
+  pinMode(LED6, OUTPUT);
+  pinMode(LED7, OUTPUT);
+  pinMode(LED8, OUTPUT);
+  pinMode(Mic, INPUT);
+  Serial.println("Hello World");
+}
+
+void loop() 
+{
+
+
+v = analogRead(Mic);
+  Serial.println(v);
+  
+// Checking The Volume Of the LEDS
+      if(v <= Low)
+      {
+          // creating flashing mechanism for Volume that is at Noise Level
+            digitalWrite(LED1, HIGH);
+      }
+      else
+        digitalWrite(LED1, LOW);
+        
+      v = analogRead(Mic);
+      
+      if(v > Low)
+      {
+    
+        digitalWrite(LED2, HIGH);
+      }
+      else
+        digitalWrite(LED2, LOW);
+
+      v = analogRead(Mic);
+      
+      if(v > (Low+Delta))
+      {
+    
+        digitalWrite(LED3, HIGH);
+      }
+      else
+        digitalWrite(LED3, LOW);
+
+      v = analogRead(Mic);
+
+      if(v > (Low+(2*Delta)))
+      {
+    
+        digitalWrite(LED4, HIGH);
+      }
+      else
+        digitalWrite(LED4, LOW);
+
+      v = analogRead(Mic);
+
+      if(v > (Low+(3*Delta)))
+      {
+    
+        digitalWrite(LED5, HIGH);
+      }
+      else
+        digitalWrite(LED5, LOW);
+
+      v = analogRead(Mic);
+
+      if(v > (Low+(4*Delta)))
+      {
+    
+        digitalWrite(LED6, HIGH);
+      }
+      else
+        digitalWrite(LED6, LOW);
+
+      v = analogRead(Mic);
+      
+      if(v > (Low+(5*Delta)))
+      {
+    
+        digitalWrite(LED7, HIGH);
+      }
+      else
+        digitalWrite(LED7, LOW);
+
+      v = analogRead(Mic);
+
+      if (v > (Low+(6*Delta)+40))
+      {
+
+          // creating flashing mechanism for Volume that is at Noise Level
+            digitalWrite(LED8, HIGH);
+      }
+      else
+        digitalWrite(LED8, LOW);
+    
+   }
